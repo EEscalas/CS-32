@@ -1,0 +1,338 @@
+Project 3: Frackman Report	Elena Escalas 704560697
+
+Actor.cpp Public Functions:
+
+Actor Class Public Functions:
+	Many of these functions tailored specifically to nuggets, protesters, and other derived classes must
+be defined in the actor class because they must be accessed through the vector or actors in studentWorld, and
+studentWorld's vector of actors can only call functions defined for actors, not just the derived classses
+
+Functions used by StudentWorld():
+	- either need data concerning the location of objects
+	- or need to be able to identify certain types of objects within the actor vector to apply certain functions to them
+bool isAlive() const
+	- this function identifies whether or not kill() has been called on an actor
+        - used when studentWorld clears the field of dead actors
+void setVisible() 
+	- this function calls setVisibility(true) and sets a data member in actor to true
+        - the reason for this duplicate of the function already defined in GraphObject
+	  is that I needed the function isVisible() to check for gold nuggets and dirt
+          but the isVisible() function in graphObject was not available for our use, so 
+          I made my own
+void makeInvisible() 
+	- this function calls setVisibility(false) and sets a data member in actor to true
+	- duplicate of GraphObject function reasoning same as above (for setVisible())
+virtual void sendHome()
+	- calls kill() for all actors except protesters, where it sends them home by setting them to a leave-the-oil-field state
+virtual bool isBoulder() const
+	- this function identifies an Actor in the vector of actors within the studentWorld
+	  data members as a Boulder
+	- must be virtual so that it can return true in the Boulder class derived from the Actor class
+virtual bool isHuman() const
+	- this function identifies Human Actors from the vector of actors in StudentWorld
+	- must be virtual because must return true if the actor is a human actor
+	- used when I need to call functions on a protester in the field that is a member of the actor vector
+virtual bool isFalling() const
+	- returns whether or not a boulder is in a stable state
+	- used when studentWorld needs to check if a boulder overlaps with a human actor (protester or frackman)
+virtual bool isSquirt() const
+	- returns false unless pointing to an actor in the derived Squirt class
+	- used when studentWorld needs to check if a protester overlaps with a squirt from the frackman
+virtual void kill() 
+	- sets data member in Actor class to dead so they can be removed from the field
+	- virtual because some derived classes respond differently to dying
+virtual void squirtProtester()
+	- squirts the protester called to it, which calls the annoy function for the protester
+	- virtual because only applies to protestester subclass
+	- not pure virtual because doesn't need to be defined for other subclasses of the actor class
+virtual void instersectNugget()
+	- does the appropriate response for HumanActors when they intersect a nugget
+	- virtual and not pure virtual for same reasons as above
+virtual void doSomething()
+	- pure virtual becuse must be defined for every derived class of the actor class
+	- called for every element in the vector of Actors during each tick in StudentWorld
+virtual bool isDirtBelow(int x, int y) const
+	- used to check to see if there is dirt below a boulder, to see if it will eventaully fall
+	- virtual because only relevent to boulder class
+StudentWorld* getWorld() const
+	- returns a pointer to the studentWorld passed to actors during their initialization 
+	- makes world functions accessible to derived classes without having their own data member pointer to the studentWorld
+Functions used by derived classes only:
+void incTicks()
+	- increases the tick count data member in the Actor class; doesn't need to be virtual because not modified
+void setTicksToZero()
+	- restarts the tick count
+void getTickCount()
+	- returns the number of ticks counted since the last restarted tick count
+virtual void annoy()
+	- annoys protesters and the frackman when they are squirted
+	- virtual and not pure virtual because only relevent to human actor classes
+virtual void bribed()
+	- response when a protester picks up a gold nugget
+	- same reasoning as above, but only relevent for protesters
+
+Dirt class Public Functions: doSomething does nothing
+
+Boulder class Public Functions:
+virtual void doSomething()
+	- if there is dirt below the boulder do nothing, otherwise wait the appropriate number of ticks before falling
+virtual bool isBoulder()
+	- return true because this derived class is the boulder class
+virtual bool isFalling()
+	- return the data member that indicates the stability of the boulder
+
+SquirtGun class Public Functions:
+virtual void doSomething()
+	- if the gun has been created, squirt in the appropriate direction for the travel distance
+	  die when travel distance has been reached
+virtual bool isSquirt()
+	- return true because this derived class is the squirtGun class
+
+HumanActor class Public Functions:
+virtual void doSomething()
+	- pure virtual to insure that every derived class of human actor has a valid doSomething function
+virtual bool isHuman()
+	- described above in Actor functions, here returns true because human actor class
+void decHitPoints()
+	- decreases the hit points for any human actor
+void setHitPointsTo(int hitPoints)
+	- sets the hitpoints to a certain value for any human actor
+bool zeroHitPoints() const
+	- tells whether or not the human actor has any hitpoints left (which ultimately sets them to dead)
+int getHitPoints() const
+	- returns the current number of hitpoints - used for creating the display text in StudentWorld
+virtual void annoy() = 0
+	- pure virtual function to insure that function is defined for all human actors
+	- makes human actor an abstract base class
+void incGoldNuggets()
+	- increase gold nugget count
+void decGoldNuggets()
+	- decrease gold nugget count
+bool noGoldNuggets() const
+	- returns whether or not there are any gold nuggets left
+int getNuggets() const
+	- returns the number of nuggets the human actor has
+	- used for display text by StudentWorld
+virtual void kill()
+	- set hitpoints to zero and calls the general Actor::kill() to set the state to dead
+
+FrackMan class Public Functions:
+virtual void doSomething()
+	- necessary in order to make FrackMan not an abstract base class
+	- removes dirt if the frackman overlaps with dirt
+	- responds to key presses by the user
+int getSonar() const
+	- returns number of sonar kit's the frackman currently holds
+	- used in StudentWorld for display text
+void decSonar()
+	- decrease the number of sonar once one is used
+void incSonar()
+	- increase the number of sonar once the frackman comes into contact with a sonar
+void incSquirt()
+	- increase the number of squirts (by 5) once the frackman comes into contact with a water pool
+void getSquirts() const
+	- returns the number of squirts the frackman currently holds
+void squirt()
+	- completes the action of squirting the protesters
+
+Protester class Public Functions:
+virtual void doSomething()
+	- makes Protester class not an abstract base class
+	- counts resting and non-resting ticks
+	- deals with protester stunning and leave-the-oil-field state
+	- shouts at the frackMan if he is within range
+	- moves towards frackMan if he is within the regular protesters line of sight (inLineOfSight())
+	- makes sure a perpendicular turn occurs every 200 non-resting ticks
+void squirtProtester()
+	- makes appropriate sound for being squirted and annoys the protester
+virtual void intersectNugget()
+	- virtual because protester will set itself to a leaving state, whereas a hardcore protester
+	  will just be momentarily stunned
+virtual void sendHome()
+	- makes appropriate giving-up noise and sets the protester to the leave-the-oil-field state
+virtual bool isLeaving()
+	- returns whether or not the protester is in the leaving state to insure that no further damage
+	  can be made to the protester once he has already given up
+virtual void bribed()
+	- function in Protester's doSomething that a hardcore protester will define differently when bribed by gold
+	  than a regular protester
+	- sets Protester to leaving state
+virtual void inLineOfSight()
+	- function in Protester's doSomething that's function becomes redefined for a hardcore protester
+	- determines whether or not the protester is in direct x or y direction from the frackman without any obstructions
+virtual void moveTowardsFrackman()
+	- function in Protester's doSomething that is redefined for a hardcore protester
+
+HardcoreProtester class Public Functions:
+virtual void doSomething()
+	- modifies the data structure that keeps track of the field and then calls Protester::doSomething()
+virtual void bribed()
+	- stuns Hardcore Protester
+virtual bool inLineOfSight()
+	- redefines function in Protester::doSomething()
+	- determines whether or not a frackman is a certain number of steps away from the frackman
+virtual void moveTowardsFrackman()
+	- moves one step towards the frackman
+
+GoodieActor class Public Functions:
+virtual void doSomething() = 0
+	- makes goodieActor an ABC
+	- makes it so that every derived class of goodie actor must have doSomething() defined in order to not be an ABC
+virtual void find()
+	- when a goodie actor is within a certain of radius of the frackman, it is found and gets 
+	  removed (removeObject()) accordingly
+void getFrackManPosition(int &x, int &y)
+	- returns the position of the frackman
+virtual void removeObject() = 0
+	- removeObject() has a different function depending on what derived class it is called on
+void incSonarKit()
+	- increases the number of sonarKits
+void incNuggets()
+	- increases the number of nuggets
+void addSquirtsToGun
+	- add squirts (from waterpool) to squirtgun
+
+BarrelOfOil class Public Functions:
+virtual void doSomething()
+	- calls find() to see if it has been found
+virtual void removeObject()
+	- decrease the number of barrels, play the correct sound, and increase the game score accordingly
+
+GoldNugget class Public Functions:
+virtual void doSomething()
+	- kill a nugget if it has been dropped for the correct amount of time before being found
+	- or it has been found by a protester
+	- or see if it has been found
+virtual void removeObject()
+	- increase nuggets, play appropriate sound, and increase the score
+void drop()
+	- set to dropped state
+
+SonarKit class Public Functions:
+virtual void doSomething()
+	- make visible for appropriate amount of time before calling kill() to make it dissappear
+virtual void removeObject()
+	- increase sonarkit, play appropriate sound, and increase score
+
+WaterPool class Public Functions:
+virtual void doSomething()
+	- find(), if found for a appropriate time then call kill()
+virtual void removeObject()
+	- play appropriate sound, add squirts to gun, increase score, set invisible, and call kill()
+
+StudentWorld class Public Functions: (none are virtual)
+void removeDirtFrom (int x, int y) - removes dirt from a point
+bool isDirtInField (int x, int y) - return whether or not there is dirt in the field at a certain point
+bool BoulderpointIsFree(int x, int y) const - check to see whether a point has a boulder or not
+void addObject(Actor* object) - adds object to vector of actors in the field
+bool frackManisAlive() const - checks to see if frackman is alive
+void decBarrels() - decreases the number of barrels for the display text
+void dropNugget(int x, int y) - gives the location at which to drop a nugget
+void incSonarKit() - increase the number of sonar for the display text
+bool is SonarKitEmpty() const - see whether or not the sonar kit is empty (no sonar available for use)
+void useSonar() - makes appropriate noises and makes appropriate actors visible with sonar use
+bool ProtesterpointIsFree(int x, int y) const - returns whether or not a point in the oil field has a protester
+bool intersectProtester() - checks to see whether or not a point intersects
+bool annoyProtester(int x, int y) - if a protester is at point (x,y) annoy it and return true, otherwise return false
+bool frackmanIsAlive() const - returns whether or not frackman is alive
+bool isShaft(int x, int y) - returns whether or not a point is in the dirtless shaft
+void annoyFrackman() - calls annoy for frackman
+void getFrackManPosition(int x, int y) - returns the position of the frackman
+bool isDirtOrBoulderInField() const - returns whether or not dirt or a boulder are at a certain point in the field
+bool intersectProtester(int x, int y) - returns true if (x,y) contains a protester
+
+Known Bugs and Failed Functionalities:
+I was unable to finish determining if the hardcore protester was within a certain number of steps from the protester:
+	my code compiles, but has a bug every time a hardcore protester shows up.
+	I ran out of time to debug my hardcore protester so I commented out my work so far and essentially made the 
+	hardcore protester work as a protester.
+	My plan:
+		Have a data member function in either studentWorld or hardcoreProtester that keeps track of available
+	spaces, and then do a breadth-first search determining whether or not there's a direct path towards the frackman,
+	and make sure to mark discovered spaces with a '#' (data member array is array of char). Then go back through
+	the maze starting at the frackman's position and then change all the '#' it comes into contact with to '$' until
+	the frackman has reached the hardcore protester. Then the idea is that the path from the protester to the frackman
+	is labeled as '$', so to count the moves you go through and count the '$' in the array, and then have the hardcore
+	protester follow the $ if the path is few enough steps away.
+	My error:
+		I was unable to find an efficient way to update my data member array that kept track of possible
+	pathways and determine whether or not there is an obstruction at that point. My program ran very slowly when
+	I tried to keep this array of char in the hardcore protester class, because I could only think of refilling the
+	array after every tick, which is extraordinarily inefficient, but I didn't have enough time to create all the 
+	functions necessary for creating the array in StudentWorld
+I have a bug that my squirt does not show up when I am within one or two blocks of the protester
+	the protester does die, but the squirt does not display
+My protesters sometimes spin in circles in place until they come into sight of a protester and get back on track
+	this appears to be an error with my check for perpendicular turns after 200 non-resting ticks. Also, my leave-the-oil-field
+	journey sometimes takes much longer than the most efficient route if the protester has walked far from the shaft middle
+	portion of the oil field. Also, sometimes the protester intersects a second nugget when it is in leave-the-oil-field state.
+
+Design Assumptions:
+	- assumed boulders could not intersect with waterpools
+	- squirt makes a sound
+	- frackman remains animated attempting to go off the edges of the field, but remains in place when trying
+	  to go through a boulder
+	- all other design assumptions were made either in accoradance with the spec or example game
+How I tested each class:
+
+Actors:
+	Dirt:
+		I tested the Dirt mostly by taking the frackman and digging to the edges of the field. If there
+	were errors in the bounds of my for loops creating the field in my pointer to dirt array. When it came to 
+	the dirt, I used it as a basis for which to test my other functions such as boulders and the frackman.
+	Boulder:
+		I tested the boulder by walking towards it from multiple directions with the frackman, to make sure
+	the frackman could not run through the boulder. Also, I tested the boulder falling by having the frackman
+	not only remove the dirt beneath the boulder, but also tested removing the dirt a couple rows under, because
+	at one point I had a bug that made it so that the boulder would fall through one layer of dirt. Also, I tested
+	the boulder falling, and then after I got the boulder to fall, I made the fall kill the frackman. Another test
+	I did was the frackman dying from a boulder, because for a while every once in a while I would the boulder not 
+	properly die and the dirt that would surround the boulder was not present, but the boulder was missing. This helped
+	me see a major error in my removal of dead objects in the move() function of my studentWorld.
+	SquirtGun:
+		I tested the squirt gun by squirting protesters, dirt, boulders, and open space to make sure the squirt
+	only became visible at the proper times. I also tested every direction to make sure the start of the splash was
+	equidistant from the frackman in each direction.
+
+	Human Actors:
+		FrackMan:
+			I tested the frackman by having him interact with all the actors in the oil field. I made sure that
+		the frackman could only go towards the edge of the field and not further than the dirt ended. Also, I
+		tested whether or not goodieActors would appear when the frackman got close enough to them, and disappear
+		when the frackman found them. I also would play the game and make sure that all the goodie actors were
+		properly logged by checking the display text. When dealing with protesters, I attempted to squirt them
+		from all directions. I also tried every key input to see if the frackman would react properly.
+		Protester:
+			I tested having the protester interact to maximum capacity with the protester. I dropped nuggets,
+		squirted, dropped boulders, and intersected with the frackman. I made sure to turn up the volume while doing
+		these things to make sure the correct noises were being made by the protester to distinguish an annoyance via
+		squirt and an annoyance via boulder falling. I also would move the frackman such that the protester should
+		follow it because it is within the protester's line of sight. I also made the protester pick up a nugget, and
+		made sure that once the protester enterred the leave-the-oil-field state it did not interact with nuggets or
+		the frackman.
+		HardcoreProtester:
+			Since my hardcore protester interacts similarly to the protester since I was not able to finish my 
+		breadth-first search path finding functions, so the only major difference was making sure when I dropped a 
+		nugget the Hardcore protester wouldn't leave the field, just simply get stunned. Also, make sure that it takes
+		more squirts to fully annoy a hardcore protester than a regular protester.
+	Goodie Actors:
+		BarrelOfOil:
+			I checked barrels of oil by having the frackman attempt to collect the barrels of oil to check for errors
+		in synchronicity with the display text as well as errors of the number of barrels in the oil field and whether or 
+		not the barrel becomes visible when the frackman reaches a distance of 4 and being captured when it reaches a distance
+		of 3.
+		GoldNugget:
+			I made sure to capture nuggets and check whether or not the display text accordingly. Also, I tried dropping
+		nuggets in random areas and making sure they disappear after 100 ticks. Also, I made sure the nugget interacted properly
+		with protesters by dropping them in front of the protester and making sure regular protesters left the oil field once they
+		recieving the gold nugget, and hardcore protesters became stunned after receiving their gold nugget.
+		SonarKit:
+			I checked for the regularity of the sonar kit appearance and made sure it was not unreasonable. Then I tested
+		the sonar kit by capturing the sonar kit and pressing z so that the sonar kit would properly make the surrounding goodie
+		actors visible. Then, I checked to make sure all the surrounding goodies were visible by digging around where the sonar
+		kit should have made the goodies visible.
+		WaterPool:		
+			I checked for the regularity of waterpools appearance and made sure they did not appear in dirt. I also checked
+		whether or not pools disappeared following each level by dropping a boulder on the frackman, this caught an error for me 
+		early on of my cleanup() function in student world not properly deleting every actor. Also, I captured the waterpools with
+		the frackman and made sure that it increased the squirt count by 5 on the display text.

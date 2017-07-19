@@ -1,0 +1,117 @@
+
+#include "actor.h"
+#include <string>
+#include <iostream>
+using namespace std;
+
+///////////////////////////////////////////////////////////
+///////////////      A C T O R      ///////////////////////
+///////////////////////////////////////////////////////////
+
+Actor::Actor()
+{}
+
+Actor::~Actor()
+{}
+
+///////////////////////////////////////////////////////////
+///////      I N A C T I V E A C T O R      ///////////////
+///////////////////////////////////////////////////////////
+
+InactiveActor::InactiveActor()
+{}
+
+InactiveActor::~InactiveActor()
+{}
+
+////////////////      D I R T       ///////////////////////
+
+Dirt::Dirt()
+{}
+
+Dirt::~Dirt()
+{}
+
+//////////////     B O U L D E R       ////////////////////
+
+Boulder::Boulder()
+{}
+
+Boulder::~Boulder()
+{}
+
+///////////////////////////////////////////////////////////
+//////////////   H U M A N A C T O R    ///////////////////
+///////////////////////////////////////////////////////////
+
+HumanActor::HumanActor()
+{}
+
+HumanActor::~HumanActor()
+{}
+
+/////////////      F R A C K M A N       /////////////////
+
+FrackMan::FrackMan()
+{}
+
+FrackMan::~FrackMan()
+{}
+
+////////////////    P R O T E S T O R    //////////////////
+
+Protestor::Protestor()
+{}
+
+Protestor::~Protestor()
+{}
+
+/////////   H A R D C O R E P R O T E S T O R    //////////
+
+HardcoreProtestor::HardcoreProtestor()
+{}
+
+HardcoreProtestor::~HardcoreProtestor()
+{}
+
+///////////////////////////////////////////////////////////
+////////////    G O O D I E A C T O R    //////////////////
+///////////////////////////////////////////////////////////
+
+GoodieActor::GoodieActor()
+{}
+
+GoodieActor::~GoodieActor()
+{}
+
+////////////   B A R R E L L O F O I L    /////////////////
+
+BarrelOfOil::BarrelOfOil()
+{}
+
+BarrelOfOil::~BarrelOfOil()
+{}
+
+//////////////   G O L D N U G G E T     //////////////////
+
+GoldNugget::GoldNugget()
+{}
+
+GoldNugget::~GoldNugget()
+{}
+
+////////////////   S O N A R K I T   //////////////////////
+
+SonarKit::SonarKit()
+{}
+
+SonarKit::~SonarKit()
+{}
+
+///////////////   W A T E R P O O L    ////////////////////
+
+WaterPool::WaterPool()
+{}
+
+WaterPool::~WaterPool()
+{}

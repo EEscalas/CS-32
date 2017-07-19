@@ -1,0 +1,35 @@
+﻿Build started 3/19/2016 2:43:49 PM.
+     1>Project "C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project3\FrackMan\FrackMan\FrackMan.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /IirrKlang /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _CRT_SECURE_NO_WARNINGS /D GLUT_BUILDING_LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Actor.cpp StudentWorld.cpp
+         StudentWorld.cpp
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(152): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(173): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(196): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(238): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(248): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(273): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(357): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(385): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(445): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(447): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(467): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(480): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(530): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(579): warning C4018: '<': signed/unsigned mismatch
+         Actor.cpp
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\actor.cpp(777): warning C4101: 'p': unreferenced local variable
+         Generating Code...
+     1>c:\users\elena\onedrive\winterquarter\compsci32\project3\frackman\frackman\studentworld.cpp(408): warning C4715: 'StudentWorld::move': not all control paths return a value
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project3\FrackMan\Debug\FrackMan.exe" /INCREMENTAL /NOLOGO freeglut.lib dsound.lib winmm.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project3\FrackMan\Debug\FrackMan.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project3\FrackMan\Debug\FrackMan.lib" /MACHINE:X86 Debug\Actor.obj
+         Debug\GameController.obj
+         Debug\GameWorld.obj
+         Debug\main.obj
+         Debug\StudentWorld.obj
+         FrackMan.vcxproj -> C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project3\FrackMan\Debug\FrackMan.exe
+     1>Done Building Project "C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project3\FrackMan\FrackMan\FrackMan.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:05.78

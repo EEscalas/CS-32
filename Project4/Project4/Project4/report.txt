@@ -1,0 +1,38 @@
+Project 4 Report	Elena Escalas		704560697
+
+1. My DiskMultiMap class has a bug when erase() is called, with filling removed data spots as well as when there are 
+	collisions in the hash table. I was also unable to finish my IntelWeb::crawl() method. Also, my iterators
+	and search() function do not function properly.
+2. My DiskMultiMap uses a hash table using the standard template library's version hash function for strings. My disk
+	data consists of three headers indicating: the number of buckets, the offset of the first removed node (which
+	is the head of a linked list that connects all the removed nodes), and the number of nodes stored (in order
+	to later determine where the last open slot is for inserting new nodes). After the headers, my DiskMultiMap
+	contains numBuckets number of buckets that all contain offset values for nodes that are stored after the
+	last bucket.
+	Every node contains the key, value, and context values as arrays of characters, as well as the offset position
+	of the next node, which is set to 0 unless there is a collision in the hash table, which creates a linked list
+	between nodes that have the same hash value, whether they are of the same key, or any other key. The iterator
+	operator++ takes care of distinguishing between which node in the linked list contains the same key value as
+	requested.
+	Node insertion essentially pushes a new node with the requested values to the front of the linked list of 
+	the hash table, and with erase, each list containing the requested key is removed from the linked list, and
+	the "removed" node remains, but now becomes pushed to the front of the linked list of removed nodes, and is
+	no longer linked to the list in the hash table.
+   My IntelWeb uses two multiDiskMaps, one with the key,value,context inputs as given by the telemetry file, and one
+	that contains the same data, but with the key and value strings reversed, so that one has all the keys mapped
+	to values and context (to -> from), and one with the values mapped to the keys and contexts (from -> to). 
+	My IntelWeb::crawl() function creates an unordered_set of strings and unordered_set of strings that are  
+	concatenated Interaction maps. The unordered_set count() function ensures that I am not wasting time
+	trying to put string into the sets that already exist. I then go through my to->from and from->to unordered 
+	sets independently, using a diskMultiMap Iterator that has searched for the indicators in each map. I then go
+	through each key (essentially using the value for the key in the to->from multimap), and use a prevalence
+	boolean function to determine whether or not a key or value have a prevalence less than the recommended good
+	prevalense. When a unqiue malicious entity or interaction is found, entities are added to the unordered set 
+	of strings and interactions to the unordered set of strings that represent concatenated Interaction maps.
+	Whenever a string is added to either of the two maps, it is also pushed to the vectors. The maps ensure that
+	the vectors only recieve one of each item, and then I use sort (with a comparison function for Interaction maps)
+	to sort the badEntity and interactions vectors.
+	For IntelWeb::purge() I iterate through each of the keys of the to->from map and DiskMultiMap::erase() them, as
+	well as the from->to map and DiskMultiMap::erase() them as well.
+3. Each method does satisfy the big-O requirements as long as there is not an input of data that happens to maximize
+	the number of the collisions in the STL's hash function algorithm.

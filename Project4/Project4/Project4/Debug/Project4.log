@@ -1,0 +1,21 @@
+﻿Build started 3/10/2016 7:45:30 PM.
+     1>Project "C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project4\Project4\Project4\Project4.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt DMM.cpp DiskMultiMap.cpp IntelWeb.cpp test.cpp
+         DiskMultiMap.cpp
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         DMM.cpp
+         test.cpp
+         IntelWeb.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project4\Project4\Debug\Project4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project4\Project4\Debug\Project4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project4\Project4\Debug\Project4.lib" /MACHINE:X86 Debug\DiskMultiMap.obj
+         Debug\DMM.obj
+         Debug\IntelWeb.obj
+         Debug\test.obj
+         Project4.vcxproj -> C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project4\Project4\Debug\Project4.exe
+     1>Done Building Project "C:\Users\Elena\OneDrive\WinterQuarter\CompSci32\Project4\Project4\Project4\Project4.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.19
